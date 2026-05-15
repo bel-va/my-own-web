@@ -302,6 +302,81 @@
     .form-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(124,58,237,0.45); }
     .form-fine { text-align: center; font-size: 0.7rem; color: var(--muted); margin-top: 10px; }
 
+    /* ── TEAM ── */
+    #team { padding: 110px 0; background: var(--bg); }
+    .team-top { text-align: center; margin-bottom: 64px; }
+    .team-top .section-rule { justify-content: center; margin-bottom: 20px; }
+    .team-eyebrow { font-size: 0.7rem; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .team-h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+      color: var(--dark); line-height: 1.18; letter-spacing: -0.4px;
+    }
+    .team-h2 em { font-style: italic; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .team-card {
+      display: grid; grid-template-columns: 400px 1fr;
+      gap: 72px; align-items: center;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 28px; overflow: hidden;
+      box-shadow: 0 8px 48px rgba(124,58,237,0.1);
+    }
+    .team-photo-wrap { position: relative; height: 520px; overflow: hidden; }
+    .team-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+      display: block;
+    }
+    .team-photo-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--white) 100%);
+    }
+    .team-info { padding: 52px 52px 52px 0; }
+    .team-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.69rem; font-weight: 700; letter-spacing: 1.1px;
+      text-transform: uppercase; color: var(--accent);
+      background: var(--a-light); border: 1px solid var(--border);
+      padding: 4px 14px; border-radius: 100px; margin-bottom: 22px;
+    }
+    .team-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+    .team-name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(2.2rem, 3.5vw, 3rem);
+      color: var(--dark); line-height: 1.05; letter-spacing: -0.8px;
+      margin-bottom: 6px;
+    }
+    .team-role {
+      font-size: 0.9rem; font-weight: 600;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 24px; display: block;
+    }
+    .team-bio { font-size: 0.95rem; color: var(--soft); line-height: 1.82; margin-bottom: 28px; }
+    .team-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .team-tag {
+      font-size: 0.72rem; font-weight: 600; padding: 5px 14px;
+      background: var(--surface); color: var(--accent);
+      border: 1px solid var(--border); border-radius: 100px;
+    }
+    .team-stats { display: flex; gap: 32px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .ts-item strong {
+      display: block; font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem; line-height: 1;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .ts-item span { font-size: 0.74rem; color: var(--muted); margin-top: 3px; display: block; }
+
+    @media (max-width: 900px) {
+      .team-card { grid-template-columns: 1fr; }
+      .team-photo-wrap { height: 380px; }
+      .team-photo-wrap::after { background: linear-gradient(to bottom, transparent 60%, var(--white) 100%); }
+      .team-info { padding: 0 28px 40px; }
+    }
+    @media (max-width: 640px) {
+      .team-photo-wrap { height: 300px; }
+      .team-stats { gap: 20px; flex-wrap: wrap; }
+    }
+
     /* ── FOOTER ── */
     footer { background: var(--dark); padding: 40px 0; border-top: 1px solid rgba(124,58,237,0.15); }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
@@ -512,6 +587,49 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="team-top reveal">
+      <p class="team-eyebrow">The person behind your clear desk</p>
+      <h2 class="team-h2">Meet the <em>team.</em></h2>
+    </div>
+
+    <div class="team-card">
+      <div class="team-photo-wrap">
+        <img src="belyn.jpg" alt="Belyn — Founder & Lead Virtual Assistant at ClearDesk" />
+      </div>
+      <div class="team-info reveal d1">
+        <div class="team-badge"><span class="team-dot"></span>Available for new clients</div>
+        <h2 class="team-name">Belyn</h2>
+        <span class="team-role">Founder &amp; Lead Virtual Assistant</span>
+        <p class="team-bio">
+          Belyn is the heart and driving force behind ClearDesk. With <strong>4 years of hands-on experience</strong> supporting founders, executives, and growing businesses across multiple industries, she brings precision, warmth, and genuine ownership to every client she works with.
+        </p>
+        <p class="team-bio">
+          She started her VA career managing high-volume inboxes, complex executive calendars, and multi-platform social strategies — and quickly discovered that the right support doesn't just save time, it transforms how business owners feel about their work. That insight became the foundation of ClearDesk.
+        </p>
+        <p class="team-bio">
+          Belyn's standard is simple: every client deserves to wake up to a clear desk. She makes sure that happens — every single morning.
+        </p>
+        <div class="team-tags">
+          <span class="team-tag">Inbox &amp; Calendar</span>
+          <span class="team-tag">Social Media</span>
+          <span class="team-tag">CRM Management</span>
+          <span class="team-tag">Customer Support</span>
+          <span class="team-tag">Data &amp; Research</span>
+        </div>
+        <div class="team-stats">
+          <div class="ts-item"><strong>4 yrs</strong><span>VA experience</span></div>
+          <div class="ts-item"><strong>200+</strong><span>clients supported</span></div>
+          <div class="ts-item"><strong>4.9★</strong><span>avg. rating</span></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
