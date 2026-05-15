@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ClearDesk matches you with skilled virtual assistants who handle inbox, calendar, social media, customer support, data entry, and CRM — so you can focus on growth." />
+  <title>ClearDesk — Virtual Assistant Agency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0d0f1a;
+      --ink-soft:  #3d4054;
+      --muted:     #8b8fa8;
+      --teal:      #0ea5e9;
+      --teal-deep: #0284c7;
+      --emerald:   #10b981;
+      --amber:     #f59e0b;
+      --violet:    #8b5cf6;
+      --indigo:    #6366f1;
+      --surface:   #f6f7fb;
+      --card:      #ffffff;
+      --border:    #e8eaf2;
+      --white:     #ffffff;
+      --grad:      linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+      --grad-soft: linear-gradient(135deg, rgba(14,165,233,0.12) 0%, rgba(99,102,241,0.12) 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── UTILITIES ── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.71rem; font-weight: 700; letter-spacing: 1.1px;
+      text-transform: uppercase; color: var(--teal);
+      background: rgba(14,165,233,0.1); padding: 5px 14px;
+      border-radius: 100px; margin-bottom: 18px;
+    }
+
+    h2.section-title {
+      font-size: clamp(2rem, 3.8vw, 2.75rem);
+      font-weight: 900; letter-spacing: -0.8px; line-height: 1.14;
+      margin-bottom: 14px;
+    }
+    p.section-desc {
+      font-size: 1.05rem; color: var(--ink-soft);
+      max-width: 540px; line-height: 1.75;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: 10px;
+      font-size: 0.92rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; border: none;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-primary {
+      background: var(--grad); color: var(--white);
+      box-shadow: 0 6px 20px rgba(14,165,233,0.32);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(14,165,233,0.48); }
+    .btn-ghost {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--teal); color: var(--teal); background: rgba(14,165,233,0.04); }
+    .btn-lg { padding: 15px 30px; font-size: 0.96rem; border-radius: 12px; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.18s; }
+    .d3 { transition-delay: 0.26s; }
+    .d4 { transition-delay: 0.34s; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 68px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 32px rgba(13,15,26,0.08); border-color: transparent; }
+    .nav-wrap { height: 68px; display: flex; align-items: center; justify-content: space-between; }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 1.18rem; font-weight: 900; color: var(--ink);
+      text-decoration: none; letter-spacing: -0.5px;
+    }
+    .nav-logo-mark {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.88rem; font-weight: 600; color: var(--ink-soft);
+      text-decoration: none; transition: color 0.2s; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+      height: 2px; background: var(--teal); border-radius: 1px;
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; border-radius: 6px; transition: background 0.2s;
+    }
+    .hamburger:hover { background: var(--surface); }
+    .hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--ink); border-radius: 2px;
+      transition: transform 0.28s, opacity 0.28s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none; flex-direction: column; gap: 0;
+      position: absolute; top: 68px; left: 0; right: 0;
+      background: var(--white); border-bottom: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(13,15,26,0.08);
+      padding: 8px 28px 20px; list-style: none;
+      animation: slideDown 0.2s ease;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav li a:not(.btn) {
+      display: block; font-size: 0.95rem; font-weight: 600;
+      color: var(--ink-soft); text-decoration: none;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-nav li:last-child a:not(.btn) { border-bottom: none; }
+    .mobile-nav li a:not(.btn):hover { color: var(--ink); }
+    .mobile-nav .btn { margin-top: 14px; justify-content: center; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── HERO ── */
+    #home { padding: 148px 0 100px; position: relative; overflow: hidden; }
+    .hero-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(14,165,233,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(99,102,241,0.07) 0%, transparent 70%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.45;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, black 25%, transparent 72%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: center;
+    }
+
+    .hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; }
+    .live-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(16,185,129,0.1); color: #059669;
+      padding: 5px 12px; border-radius: 100px;
+      font-size: 0.73rem; font-weight: 700;
+    }
+    .live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--emerald); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.45; transform: scale(0.72); }
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.6rem, 5vw, 3.9rem);
+      font-weight: 900; letter-spacing: -1.8px;
+      line-height: 1.07; margin-bottom: 22px;
+    }
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-copy p {
+      font-size: 1.08rem; color: var(--ink-soft);
+      line-height: 1.8; margin-bottom: 36px; max-width: 460px;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
+
+    .hero-proof {
+      display: flex; align-items: center; gap: 20px;
+      padding-top: 30px; border-top: 1px solid var(--border);
+    }
+    .avatars { display: flex; }
+    .av {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2.5px solid var(--white); margin-left: -9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 800; color: var(--white); flex-shrink: 0;
+    }
+    .av:first-child { margin-left: 0; }
+    .av-a { background: linear-gradient(135deg,#f59e0b,#ef4444); }
+    .av-b { background: linear-gradient(135deg,#10b981,#0ea5e9); }
+    .av-c { background: linear-gradient(135deg,#8b5cf6,#ec4899); }
+    .av-d { background: linear-gradient(135deg,#6366f1,#0ea5e9); }
+    .proof-text .strong { display: block; font-weight: 700; color: var(--ink); font-size: 0.85rem; }
+    .proof-text .soft   { color: var(--muted); font-size: 0.82rem; }
+
+    /* hero cards */
+    .hero-panel { display: flex; flex-direction: column; gap: 14px; }
+    .panel-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 18px; padding: 22px 24px;
+      box-shadow: 0 2px 16px rgba(13,15,26,0.05);
+      transition: transform 0.28s, box-shadow 0.28s;
+    }
+    .panel-card:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(13,15,26,0.09); }
+    .pc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .pc-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .pc-icon.sky     { background: rgba(14,165,233,0.12); color: var(--teal); }
+    .pc-icon.violet  { background: rgba(139,92,246,0.12); color: var(--violet); }
+    .pc-meta { flex: 1; }
+    .pc-meta strong { display: block; font-size: 0.87rem; font-weight: 700; }
+    .pc-meta span   { font-size: 0.74rem; color: var(--muted); }
+    .pc-badge {
+      font-size: 0.67rem; font-weight: 700; padding: 3px 10px; border-radius: 100px; white-space: nowrap;
+    }
+    .bg-green  { background: rgba(16,185,129,0.12); color: #059669; }
+    .bg-blue   { background: rgba(14,165,233,0.12); color: var(--teal-deep); }
+
+    .task-rows { display: flex; flex-direction: column; gap: 9px; }
+    .task-row { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: var(--ink-soft); }
+    .chk {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .chk-on  { background: rgba(16,185,129,0.14); color: #059669; }
+    .chk-on svg { width: 10px; height: 10px; }
+    .chk-off { border: 1.5px solid var(--border); }
+
+    .bar-wrap { margin-top: 14px; }
+    .bar-top { display: flex; justify-content: space-between; font-size: 0.71rem; color: var(--muted); margin-bottom: 6px; }
+    .bar-track { height: 5px; background: var(--border); border-radius: 100px; overflow: hidden; }
+    .bar-fill  { height: 100%; border-radius: 100px; background: var(--grad); }
+
+    .metric-row { display: flex; }
+    .metric { flex: 1; text-align: center; padding: 10px 0; }
+    .metric:not(:last-child) { border-right: 1px solid var(--border); }
+    .metric .num { font-size: 1.4rem; font-weight: 900; line-height: 1; }
+    .metric .lbl { font-size: 0.69rem; color: var(--muted); margin-top: 3px; }
+
+    /* ── SERVICES ── */
+    #services { padding: 110px 0; background: var(--surface); }
+    .services-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 32px; margin-bottom: 56px; flex-wrap: wrap;
+    }
+    .services-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 20px; }
+
+    .svc {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 32px;
+      transition: transform 0.24s, box-shadow 0.24s, border-color 0.24s;
+    }
+    .svc:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(13,15,26,0.09);
+      border-color: rgba(14,165,233,0.28);
+    }
+    .svc.c7  { grid-column: span 7; }
+    .svc.c5  { grid-column: span 5; }
+    .svc.c4  { grid-column: span 4; }
+
+    .svc-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+    }
+    .svc h3 { font-size: 1.07rem; font-weight: 800; margin-bottom: 10px; }
+    .svc p  { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.72; }
+    .pills  { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 0.71rem; font-weight: 600; color: var(--ink-soft);
+    }
+
+    /* ── PROCESS ── */
+    #process { padding: 110px 0; background: var(--white); }
+    .process-head { text-align: center; margin-bottom: 64px; }
+    .process-head .section-desc { margin: 0 auto; }
+
+    .process-steps {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 40px; position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute; top: 27px;
+      left: calc(16.66% + 28px); right: calc(16.66% + 28px);
+      height: 1px; background: var(--border);
+    }
+    .process-step { text-align: center; }
+    .step-num {
+      width: 54px; height: 54px; border-radius: 16px;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 1.15rem; font-weight: 900; color: var(--white);
+      position: relative; z-index: 1;
+      box-shadow: 0 6px 22px rgba(14,165,233,0.34);
+    }
+    .process-step h3 { font-size: 1.03rem; font-weight: 800; margin-bottom: 9px; }
+    .process-step p  { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.7; max-width: 260px; margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    #about { padding: 110px 0; background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+    .about-left { display: flex; flex-direction: column; gap: 16px; }
+    .about-card {
+      background: var(--ink); border-radius: 28px;
+      padding: 48px 44px; color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute; width: 350px; height: 350px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,0.22) 0%, transparent 70%);
+      top: -120px; right: -100px;
+    }
+    .quote-mark {
+      font-size: 4rem; line-height: 1;
+      color: rgba(255,255,255,0.1);
+      font-family: Georgia, serif; margin-bottom: 10px;
+      position: relative; z-index: 1;
+    }
+    .about-card blockquote {
+      font-size: 1.22rem; font-weight: 700; line-height: 1.6;
+      margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .about-card cite {
+      font-size: 0.81rem; font-style: normal; opacity: 0.48;
+      display: flex; align-items: center; gap: 8px;
+      position: relative; z-index: 1;
+    }
+    .about-card cite::before {
+      content: ''; display: inline-block; width: 18px; height: 1px; background: rgba(255,255,255,0.45);
+    }
+
+    .floaters { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .floater {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 16px; padding: 16px;
+      box-shadow: 0 4px 18px rgba(13,15,26,0.06);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .f-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--grad-soft); display: flex;
+      align-items: center; justify-content: center; color: var(--teal);
+    }
+    .floater strong { font-size: 1.1rem; font-weight: 900; color: var(--ink); line-height: 1; }
+    .floater span   { font-size: 0.71rem; color: var(--muted); }
+
+    .about-right { padding-top: 8px; }
+    .about-right .section-desc { margin-bottom: 40px; }
+    .feature-list { display: flex; flex-direction: column; gap: 24px; margin-bottom: 44px; }
+    .feature { display: flex; gap: 18px; align-items: flex-start; }
+    .feature-num {
+      font-size: 0.71rem; font-weight: 900; color: var(--teal);
+      background: rgba(14,165,233,0.1); width: 28px; height: 28px;
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .feature h4 { font-size: 0.94rem; font-weight: 700; margin-bottom: 4px; }
+    .feature p  { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.65; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--ink); padding: 100px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 80% at 20% 50%, rgba(14,165,233,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(99,102,241,0.14) 0%, transparent 60%);
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .cta-copy h2 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900; letter-spacing: -1px;
+      color: var(--white); margin-bottom: 16px; line-height: 1.12;
+    }
+    .cta-copy > p { color: rgba(255,255,255,0.56); font-size: 1rem; line-height: 1.75; margin-bottom: 28px; }
+    .cta-benefits { display: flex; flex-direction: column; gap: 12px; }
+    .cta-benefit  { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.65); font-size: 0.88rem; }
+    .check-circle {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(16,185,129,0.2); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; color: var(--emerald);
+    }
+    .check-circle svg { width: 10px; height: 10px; }
+
+    .form-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 24px; padding: 38px 36px;
+    }
+    .form-card h3 { color: var(--white); font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
+    .form-card .sub { color: rgba(255,255,255,0.46); font-size: 0.83rem; margin-bottom: 26px; }
+    .form-stack { display: flex; flex-direction: column; gap: 12px; }
+    .form-stack input {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; color: var(--white);
+      font-size: 0.9rem; font-family: inherit;
+      outline: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .form-stack input::placeholder { color: rgba(255,255,255,0.3); }
+    .form-stack input:focus { border-color: rgba(14,165,233,0.6); background: rgba(255,255,255,0.1); }
+    .form-btn {
+      margin-top: 6px; width: 100%;
+      background: var(--grad); color: var(--white);
+      border: none; border-radius: 10px; padding: 15px;
+      font-size: 0.95rem; font-weight: 700; font-family: inherit; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(14,165,233,0.34);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .form-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(14,165,233,0.52); }
+    .form-note { font-size: 0.72rem; color: rgba(255,255,255,0.28); text-align: center; margin-top: 10px; }
+
+    /* ── FOOTER ── */
+    footer { background: #080a12; padding: 36px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-wrap {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 1.05rem; font-weight: 900; color: var(--white); text-decoration: none;
+    }
+    .footer-logo-mark {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: var(--grad); display: flex; align-items: center; justify-content: center;
+    }
+    .footer-links { display: flex; gap: 28px; list-style: none; }
+    .footer-links a { font-size: 0.83rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.82); }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.26); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-content  { grid-template-columns: 1fr; gap: 52px; }
+      .hero-panel    { max-width: 560px; }
+      .about-grid    { grid-template-columns: 1fr; gap: 48px; }
+      .cta-inner     { grid-template-columns: 1fr; gap: 48px; }
+      .svc.c7, .svc.c5, .svc.c4 { grid-column: span 12; }
+      .nav-links     { display: none; }
+      .nav-right .btn { display: none; }
+      .hamburger     { display: flex; }
+      .services-head { flex-direction: column; align-items: flex-start; }
+      .process-steps { grid-template-columns: 1fr; gap: 32px; }
+      .process-steps::before { display: none; }
+    }
+    @media (max-width: 560px) {
+      #home { padding: 128px 0 80px; }
+      #services, #process, #about { padding: 80px 0; }
+      .cta-section   { padding: 80px 0; }
+      .hero-ctas     { flex-direction: column; }
+      .floaters      { grid-template-columns: 1fr 1fr; }
+      .footer-wrap   { flex-direction: column; text-align: center; }
+      .footer-links  { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container nav-wrap">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="1"  y="1" width="5" height="5" rx="1.2" fill="white"/>
+          <rect x="8"  y="1" width="5" height="5" rx="1.2" fill="white" opacity=".7"/>
+          <rect x="1"  y="8" width="5" height="5" rx="1.2" fill="white" opacity=".7"/>
+          <rect x="8"  y="8" width="5" height="5" rx="1.2" fill="white" opacity=".45"/>
+        </svg>
+      </div>
+      ClearDesk
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#cta" class="btn btn-primary">Book Free Consultation</a>
+      <div class="hamburger" id="ham" role="button" aria-label="Toggle menu" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <ul class="mobile-nav" id="mobileNav">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#cta" class="btn btn-primary">Book Free Consultation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container hero-content">
+
+    <div class="hero-copy">
+      <div class="hero-eyebrow reveal">
+        <div class="live-badge"><span class="live-dot"></span>Available now</div>
+        <span style="font-size:.77rem;color:var(--muted)">Onboarding within 24 hrs</span>
+      </div>
+      <h1 class="reveal d1">Your business,<br><span class="grad-text">fully supported.</span></h1>
+      <p class="reveal d2">ClearDesk matches you with skilled virtual assistants who handle the daily grind — so you can focus on the work that actually moves your business forward.</p>
+      <div class="hero-ctas reveal d3">
+        <a href="#cta" class="btn btn-primary btn-lg">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book a Free Consultation
+        </a>
+        <a href="#services" class="btn btn-ghost btn-lg">See What We Do</a>
+      </div>
+      <div class="hero-proof reveal d4">
+        <div class="avatars">
+          <div class="av av-a">SL</div>
+          <div class="av av-b">MK</div>
+          <div class="av av-c">AJ</div>
+          <div class="av av-d">TR</div>
+        </div>
+        <div class="proof-text">
+          <span class="strong">200+ happy clients</span>
+          <span class="soft">Rated 4.9 / 5 on average</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <div class="panel-card reveal d2">
+        <div class="pc-head">
+          <div class="pc-icon sky">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="pc-meta"><strong>Today's Task Board</strong><span>Refreshed 2 min ago</span></div>
+          <span class="pc-badge bg-green">On track</span>
+        </div>
+        <div class="task-rows">
+          <div class="task-row">
+            <div class="chk chk-on"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+            Inbox triaged &amp; priority flags set
+          </div>
+          <div class="task-row">
+            <div class="chk chk-on"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+            Weekly social posts scheduled
+          </div>
+          <div class="task-row">
+            <div class="chk chk-on"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+            CRM contacts updated
+          </div>
+          <div class="task-row"><div class="chk chk-off"></div>Support queue follow-ups</div>
+          <div class="task-row"><div class="chk chk-off"></div>Data report compiled</div>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-top"><span>Completion</span><span>60%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+        </div>
+      </div>
+
+      <div class="panel-card reveal d3">
+        <div class="pc-head">
+          <div class="pc-icon violet">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+          </div>
+          <div class="pc-meta"><strong>This Month's Impact</strong><span>Across all active clients</span></div>
+          <span class="pc-badge bg-blue">Live</span>
+        </div>
+        <div class="metric-row">
+          <div class="metric"><div class="num">14h</div><div class="lbl">Saved / wk</div></div>
+          <div class="metric"><div class="num">98%</div><div class="lbl">On-time rate</div></div>
+          <div class="metric"><div class="num">4.9★</div><div class="lbl">Avg. rating</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-head reveal">
+      <div>
+        <span class="tag">What we handle</span>
+        <h2 class="section-title">Five services.<br>Zero dropped balls.</h2>
+      </div>
+      <p class="section-desc" style="margin:0">Every task is handled by trained professionals who treat your business like their own.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="svc c7 reveal">
+        <div class="svc-icon" style="background:rgba(14,165,233,.1);color:var(--teal)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <h3>Inbox &amp; Calendar Management</h3>
+        <p>We reach inbox zero every morning — triaging, flagging, drafting, and archiving. Your calendar gets blocked for deep work, meetings get prepped, and nothing ever slips.</p>
+        <div class="pills">
+          <span class="pill">Email triage</span>
+          <span class="pill">Meeting prep</span>
+          <span class="pill">Calendar blocking</span>
+          <span class="pill">Follow-up tracking</span>
+        </div>
+      </div>
+
+      <div class="svc c5 reveal d1">
+        <div class="svc-icon" style="background:rgba(139,92,246,.1);color:var(--violet)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>Social Media Scheduling</h3>
+        <p>Consistent presence across every platform. We write, design-brief, schedule, and report — keeping your brand active without demanding your attention.</p>
+        <div class="pills">
+          <span class="pill">Content calendar</span>
+          <span class="pill">Multi-platform</span>
+          <span class="pill">Analytics review</span>
+        </div>
+      </div>
+
+      <div class="svc c4 reveal">
+        <div class="svc-icon" style="background:rgba(16,185,129,.1);color:var(--emerald)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        </div>
+        <h3>Customer Support</h3>
+        <p>Fast, empathetic replies that build loyalty. We handle tickets, live chat, and email support across your helpdesk tools.</p>
+      </div>
+
+      <div class="svc c4 reveal d1">
+        <div class="svc-icon" style="background:rgba(245,158,11,.1);color:var(--amber)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+        </div>
+        <h3>Data Entry</h3>
+        <p>Accurate, structured, delivered on time. Spreadsheets, databases, and internal tools — we keep your data clean so your decisions stay sharp.</p>
+      </div>
+
+      <div class="svc c4 reveal d2">
+        <div class="svc-icon" style="background:rgba(99,102,241,.1);color:var(--indigo)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+        </div>
+        <h3>CRM Updates</h3>
+        <p>Every deal logged, every contact current. We update pipelines, record interactions, and flag stale leads before they go cold.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="process-head reveal">
+      <span class="tag">How it works</span>
+      <h2 class="section-title">Up and running in 3 steps</h2>
+      <p class="section-desc">From your first call to a fully delegated workflow — simple, fast, and risk-free.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">1</div>
+        <h3>Book a free call</h3>
+        <p>Tell us your biggest time drains. We'll map the right tasks and find the perfect VA match for your business.</p>
+      </div>
+      <div class="process-step reveal d1">
+        <div class="step-num">2</div>
+        <h3>Meet your VA</h3>
+        <p>We introduce your dedicated VA, run a live onboarding session, and set up shared tools — all within 24 hours.</p>
+      </div>
+      <div class="process-step reveal d2">
+        <div class="step-num">3</div>
+        <h3>Start delegating</h3>
+        <p>Hand off your task list. Your VA handles it, keeps you updated, and continuously improves — without you having to ask.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+
+    <div class="about-left reveal">
+      <div class="about-card">
+        <div class="quote-mark">"</div>
+        <blockquote>Getting a ClearDesk VA was like hiring a chief of staff — except I could actually afford one.</blockquote>
+        <cite>Sarah L., Founder at Trellis Co.</cite>
+      </div>
+      <div class="floaters">
+        <div class="floater">
+          <div class="f-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <strong>4.9/5</strong><span>Client satisfaction</span>
+        </div>
+        <div class="floater">
+          <div class="f-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <strong>24 hrs</strong><span>Onboarding time</span>
+        </div>
+        <div class="floater">
+          <div class="f-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <strong>12+</strong><span>Time zones covered</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-right">
+      <span class="tag">Our story</span>
+      <h2 class="section-title reveal">Built by operators,<br>for operators.</h2>
+      <p class="section-desc reveal">ClearDesk was founded by entrepreneurs who were drowning in admin work. We built the agency we always wished existed — rigorous, proactive, and genuinely invested in your growth.</p>
+      <div class="feature-list">
+        <div class="feature reveal">
+          <div class="feature-num">01</div>
+          <div>
+            <h4>Vetted &amp; trained professionals</h4>
+            <p>Every VA goes through a multi-step vetting and training process before being matched with a client.</p>
+          </div>
+        </div>
+        <div class="feature reveal d1">
+          <div class="feature-num">02</div>
+          <div>
+            <h4>Proactive, not just reactive</h4>
+            <p>Our team anticipates needs, flags issues early, and suggests improvements without being asked.</p>
+          </div>
+        </div>
+        <div class="feature reveal d2">
+          <div class="feature-num">03</div>
+          <div>
+            <h4>Full transparency, always</h4>
+            <p>Daily task logs, weekly check-ins, and real-time dashboards so you always know where your work stands.</p>
+          </div>
+        </div>
+      </div>
+      <a href="#cta" class="btn btn-primary btn-lg reveal">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book a Free Consultation
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container cta-inner">
+    <div class="cta-copy reveal">
+      <h2>Ready to get your<br><span class="grad-text">time back?</span></h2>
+      <p>Book a free 30-minute call. We'll map out your biggest time drains, show you exactly how a VA can fix them, and give you a custom plan — with no pressure to commit.</p>
+      <div class="cta-benefits">
+        <div class="cta-benefit">
+          <div class="check-circle"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+          Free 30-minute strategy session
+        </div>
+        <div class="cta-benefit">
+          <div class="check-circle"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+          Custom onboarding plan included
+        </div>
+        <div class="cta-benefit">
+          <div class="check-circle"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+          No contracts, cancel any time
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card reveal d1">
+      <h3>Book Your Free Consultation</h3>
+      <p class="sub">Takes 60 seconds. We'll reach out within 2 hours.</p>
+      <div class="form-stack">
+        <input type="text"  id="f-name"    placeholder="Your full name" />
+        <input type="email" id="f-email"   placeholder="Work email address" />
+        <input type="text"  id="f-company" placeholder="Company / business name" />
+      </div>
+      <button class="form-btn" id="formBtn" type="button">
+        Book My Free Call
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <p class="form-note">No spam. No pressure. Your info is kept private.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-wrap">
+    <a href="#home" class="footer-logo">
+      <div class="footer-logo-mark">
+        <svg width="11" height="11" viewBox="0 0 14 14" fill="none">
+          <rect x="1"  y="1" width="5" height="5" rx="1.2" fill="white"/>
+          <rect x="8"  y="1" width="5" height="5" rx="1.2" fill="white" opacity=".7"/>
+          <rect x="1"  y="8" width="5" height="5" rx="1.2" fill="white" opacity=".7"/>
+          <rect x="8"  y="8" width="5" height="5" rx="1.2" fill="white" opacity=".45"/>
+        </svg>
+      </div>
+      ClearDesk
+    </a>
+    <ul class="footer-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="mailto:hello@cleardesk.co">hello@cleardesk.co</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 ClearDesk. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Smooth scroll + close mobile nav
+  const mobileNav = document.getElementById('mobileNav');
+  const ham       = document.getElementById('ham');
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth' });
+      mobileNav.classList.remove('open');
+      ham.classList.remove('open');
+    });
+  });
+
+  // Hamburger toggle
+  ham.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    ham.classList.toggle('open', open);
+  });
+
+  // Scroll reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // Hero is above fold — trigger immediately
+  setTimeout(() => {
+    document.querySelectorAll('#home .reveal').forEach(el => el.classList.add('in'));
+  }, 80);
+
+  // Form
+  const btn     = document.getElementById('formBtn');
+  const inputs  = [
+    document.getElementById('f-name'),
+    document.getElementById('f-email'),
+    document.getElementById('f-company')
+  ];
+  const arrowSVG = btn.querySelector('svg').outerHTML;
+
+  btn.addEventListener('click', () => {
+    const filled = inputs.every(i => i.value.trim());
+    if (!filled) {
+      btn.innerHTML = 'Please fill in all fields';
+      btn.style.background = '#b45309';
+      setTimeout(() => { btn.innerHTML = 'Book My Free Call ' + arrowSVG; btn.style.background = ''; }, 2200);
+      return;
+    }
+    btn.innerHTML = 'Request sent — we\'ll be in touch!';
+    btn.style.background = '#059669';
+    inputs.forEach(i => i.value = '');
+    setTimeout(() => { btn.innerHTML = 'Book My Free Call ' + arrowSVG; btn.style.background = ''; }, 4000);
+  });
+</script>
+</body>
+</html>
